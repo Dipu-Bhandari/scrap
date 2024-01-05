@@ -1,0 +1,9 @@
+import requests
+from lxml import html
+
+url = 'https://www.wikipedia.org/'
+response = requests.get(url)
+tree = html.fromstring(response.content)
+email_ids = tree.xpath('//a[contains(@href, "mailto:")]/@href')
+for email_id in email_ids:
+    print(email_id[7:])
